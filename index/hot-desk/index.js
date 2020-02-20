@@ -1,9 +1,7 @@
-const DEMO_INSTANCE = 'c58596582'
-
 Vue.use(VueRouter)
 
 const sdk = new PrevioletSDK({
-  instance: DEMO_INSTANCE,
+  instance: 'c58596582',
   appVersion: '1.0.0',
   debug: true,
 })
