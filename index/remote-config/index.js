@@ -20,6 +20,7 @@ var router = new VueRouter({
         data: function () {
           return {
             authenticated: false,
+            welcome_message: null,
             currentUser: {
               name: null
             },
@@ -33,18 +34,13 @@ var router = new VueRouter({
         template: `
           <div class="container">
             <div>
-              <h1 class="display-4 mb-5">Guest Browsing</h1>
+              <h1 class="display-4">Remote Config</h1>
+              <h3 class="mb-5">{{ welcome_message }}</h3>
 
               <p v-if="currentUser.name == 'Guest'" class="alert alert-warning">Logged in as {{ currentUser.name }} (<a href="javascript:;" @click="login">login as John</a>)</p>
               <p v-else class="alert alert-success">Logged in as {{ currentUser.name }} (<a href="javascript:;" @click="logout">logout</a>)</p>
 
-              <p>This demo features an application with guest browsing abilities.</p>
-              <p>You are currently looking at a Todo database for which the app owner has forced a filter for Guest users. 
-              The filter does not allow Guest users to access the resolution (<strong>done</strong>) parameter.</p>
-
-              <p v-if="currentUser.name == 'Guest'">
-                To check the experience as a logged in user and get the todo resolution as well click <a href="javascript:;" @click="login">here</a> to use predefined test credentials.
-              </p>
+              <p>This demo features an application with remote configuration.</p>
             </div>
           </div>
         `,
@@ -73,6 +69,10 @@ var router = new VueRouter({
             if (user) {
               vm.authenticated = true
               vm.currentUser = previolet.user().data
+
+              previolet.remoteConfig().get().then(config => {
+                vm.welcome_message = config.welcome_message
+              })
             } else {
               vm.authenticated = false
               vm.currentUser = {

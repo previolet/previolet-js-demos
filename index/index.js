@@ -19,7 +19,6 @@ var router = new VueRouter({
                 ],
                 url: '/authentication-1',
               },
-              /*
               {
                 name: 'Remote Configuration',
                 description: 'A simple app showing how to use the remote configuration.',
@@ -29,7 +28,6 @@ var router = new VueRouter({
                 ],
                 url: '/remote-config',
               },
-              */
               {
                 name: 'Hot Desk',
                 description: 'Reserve your office desk.',
